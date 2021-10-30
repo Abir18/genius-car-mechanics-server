@@ -18,6 +18,9 @@ app.get('/', (req, res) => {
 app.get('/new', (req, res) => {
   res.send('Heroku Deploy');
 });
+app.get('/another', (req, res) => {
+  res.send('Another Heroku Deploy');
+});
 
 app.listen(port, () => {
   console.log('Running Genius Car Mechanics on', port);
