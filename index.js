@@ -7,6 +7,17 @@ const ObjectId = require('mongodb').ObjectId;
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.enable('trust proxy'); //to detect if req.secure is true/false
+
+//Block http requests. Only allow https requests
+app.use(function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.status(404).send('Not found');
+  } else {
+    next();
+  }
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
