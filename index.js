@@ -3,20 +3,24 @@ const { MongoClient } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
 const ObjectId = require('mongodb').ObjectId;
+const sslRedirect = require('heroku-ssl-redirect');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.enable('trust proxy'); //to detect if req.secure is true/false
+app.use(sslRedirect());
 
-//Block http requests. Only allow https requests
-app.use(function (req, res, next) {
-  if (req.headers['x-forwarded-proto'] !== 'https') {
-    return res.status(404).send('Not found');
-  } else {
-    next();
-  }
-});
+// //to detect if req.secure is true/false
+// app.enable('trust proxy');
+
+// //Block http requests. Only allow https requests
+// app.use(function (req, res, next) {
+//   if (req.headers['x-forwarded-proto'] !== 'https') {
+//     return res.status(404).send('Not found');
+//   } else {
+//     next();
+//   }
+// });
 
 // Middleware
 app.use(cors());
