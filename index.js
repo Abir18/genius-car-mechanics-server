@@ -15,13 +15,17 @@ app.get('/', (req, res) => {
   res.send('Genius server');
 });
 
+app.get('/new', (req, res) => {
+  res.send('Heroku Deploy');
+});
+
 app.listen(port, () => {
   console.log('Running Genius Car Mechanics on', port);
 });
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8vsmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-// console.log(uri);
+console.log(uri);
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
